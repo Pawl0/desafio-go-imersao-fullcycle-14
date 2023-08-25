@@ -1,0 +1,18 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.30-debian
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydb
+  api:
+    build: .
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysql
+    links:
+      - mysql
